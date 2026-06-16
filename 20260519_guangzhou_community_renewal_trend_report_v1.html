@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>广州社区级城市更新趋势总结报告</title>
+<style>
+  :root {
+    --ink: #1a2320;
+    --ink-soft: #3d4843;
+    --muted: #6b7872;
+    --paper: #f7f5ee;
+    --panel: #fffdf8;
+    --panel-warm: #fcf9f1;
+    --line: rgba(26, 35, 32, 0.12);
+    --green: #147a5f;
+    --green-deep: #0b4f40;
+    --amber: #b87818;
+    --red: #a24833;
+    --blue: #2b5c7c;
+    --violet: #5e4e72;
+    --radius: 8px;
+    --shadow-sm: 0 6px 20px rgba(26, 35, 32, 0.06);
+    --shadow: 0 12px 36px rgba(26, 35, 32, 0.09);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior:smooth; }
+
+  body {
+    margin:0;
+    color:var(--ink);
+    font-family:Georgia, "Noto Serif SC", "Songti SC", "SimSun", serif;
+    line-height:1.82;
+    background:
+      linear-gradient(90deg, rgba(26,35,32,0.028) 1px, transparent 1px),
+      linear-gradient(rgba(26,35,32,0.028) 1px, transparent 1px),
+      linear-gradient(135deg, #f2efe4 0%, #f7f5ef 45%, #eef3f0 100%);
+    background-size:36px 36px, 36px 36px, auto;
+  }
+
+  .page {
+    width:min(1180px, calc(100% - 32px));
+    margin:0 auto;
+    padding:30px 0 68px;
+  }
+
+  /* Hero */
+  .hero {
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:linear-gradient(135deg, rgba(255,253,248,0.97), rgba(238,246,241,0.93));
+    box-shadow:var(--shadow);
+  }
+
+  .hero-grid {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(320px,1fr);
+    min-height:500px;
+  }
+
+  .hero-copy {
+    padding:clamp(30px,5vw,58px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:18px;
+  }
+
+  .status-badge {
+    display:inline-flex;
+    width:fit-content;
+    align-items:center;
+    gap:10px;
+    margin:0;
+    padding:8px 14px;
+    border:1px solid rgba(20,122,95,0.22);
+    border-radius:var(--radius);
+    color:var(--green-deep);
+    background:rgba(255,253,248,0.85);
+    font-size:14px;
+  }
+
+  .status-badge::before { content:""; width:8px; height:8px; background:var(--amber); border-radius:50%; }
+
+  h1 {
+    margin:0;
+    max-width:760px;
+    font-size:clamp(32px,5vw,58px);
+    line-height:1.14;
+    letter-spacing:0;
+  }
+
+  .hero-lead {
+    max-width:740px;
+    margin:0;
+    padding-left:16px;
+    border-left:5px solid var(--green);
+    color:var(--ink-soft);
+    font-size:18px;
+  }
+
+  .hero-visual {
+    min-height:400px;
+    border-left:1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(20,122,95,0.06), transparent 40%),
+      linear-gradient(135deg, rgba(20,122,95,0.07), rgba(184,120,24,0.07));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .hero-visual svg { width:100%; max-width:480px; height:auto; }
+
+  /* Meta Strip */
+  .meta-strip {
+    display:grid;
+    grid-template-columns:repeat(5, minmax(0,1fr));
+    border-top:1px solid var(--line);
+    background:rgba(255,253,248,0.84);
+  }
+
+  .meta {
+    min-height:100px;
+    padding:16px 20px;
+    border-right:1px solid var(--line);
+  }
+
+  .meta:last-child { border-right:0; }
+
+  .meta strong {
+    display:block;
+    color:var(--green-deep);
+    font-size:26px;
+    line-height:1.25;
+  }
+
+  .meta span {
+    display:block;
+    margin-top:6px;
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.48;
+  }
+
+  /* Layout */
+  .layout {
+    display:grid;
+    grid-template-columns:260px minmax(0,1fr);
+    gap:22px;
+    margin-top:24px;
+    align-items:start;
+  }
+
+  .toc {
+    position:sticky;
+    top:18px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,253,248,0.92);
+    box-shadow:0 8px 26px rgba(26,35,32,0.07);
+    padding:18px;
+  }
+
+  .toc h2 { margin:0 0 12px; font-size:18px; }
+  .toc ol { margin:0; padding-left:1.3em; }
+  .toc li { margin:8px 0; color:var(--muted); font-size:14px; }
+  .toc a { color:inherit; text-decoration:none; }
+
+  .report { display:grid; gap:20px; }
+
+  section {
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,253,248,0.93);
+    box-shadow:var(--shadow-sm);
+    padding:clamp(22px,4vw,40px);
+  }
+
+  section.feature {
+    background:linear-gradient(135deg, rgba(255,253,248,0.97), rgba(238,246,241,0.93));
+  }
+
+  h2, h3, h4 { letter-spacing:0; line-height:1.32; }
+
+  h2 {
+    margin:0 0 20px;
+    font-size:clamp(24px,3.2vw,36px);
+  }
+
+  h3 {
+    margin:26px 0 12px;
+    font-size:clamp(20px,2.3vw,27px);
+    color:var(--green-deep);
+  }
+
+  h4 {
+    margin:20px 0 10px;
+    font-size:18px;
+    color:var(--blue);
+  }
+
+  p { margin:0 0 14px; }
+  ul, ol { margin:10px 0 18px; padding-left:1.45em; }
+  li { margin:6px 0; }
+  strong { color:#131e1a; }
+
+  blockquote {
+    margin:16px 0;
+    padding:16px 20px;
+    border-left:5px solid var(--amber);
+    border-radius:0 var(--radius) var(--radius) 0;
+    color:#283530;
+    background:#fef7e8;
+    font-size:17px;
+  }
+
+  /* Cards */
+  .kpi-grid {
+    display:grid;
+    grid-template-columns:repeat(5, minmax(0,1fr));
+    gap:12px;
+    margin:18px 0 22px;
+  }
+
+  .kpi {
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,253,248,0.9);
+    padding:16px;
+    text-align:center;
+  }
+
+  .kpi .num {
+    display:block;
+    font-size:28px;
+    font-weight:700;
+    color:var(--green-deep);
+    line-height:1.2;
+  }
+
+  .kpi .label {
+    display:block;
+    margin-top:6px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.45;
+  }
+
+  .kpi.highlight {
+    border-color:rgba(20,122,95,0.28);
+    background:linear-gradient(135deg, rgba(238,246,241,0.95), rgba(255,253,248,0.9));
+  }
+
+  .card-grid-2 {
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:14px;
+    margin:16px 0 6px;
+  }
+
+  .card-grid-3 {
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:14px;
+    margin:16px 0 6px;
+  }
+
+  .card {
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,253,248,0.9);
+    padding:18px;
+  }
+
+  .card b {
+    display:block;
+    margin-bottom:8px;
+    color:var(--green-deep);
+    font-size:18px;
+  }
+
+  .card span, .card p {
+    color:var(--muted);
+    font-size:14px;
+    margin:0;
+  }
+
+  /* Diagram */
+  .diagram {
+    margin:20px 0 24px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:#fbfaf6;
+  }
+
+  .diagram-title {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 16px;
+    border-bottom:1px solid var(--line);
+    color:var(--muted);
+    font-size:14px;
+    background:rgba(238,246,241,0.7);
+  }
+
+  .diagram svg {
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  /* Timeline */
+  .timeline {
+    display:grid;
+    gap:14px;
+    margin:20px 0 8px;
+  }
+
+  .stage {
+    display:grid;
+    grid-template-columns:110px minmax(0,1fr);
+    gap:14px;
+    align-items:stretch;
+  }
+
+  .stage-time {
+    border-radius:var(--radius);
+    background:var(--green-deep);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-weight:700;
+    padding:14px;
+    font-size:15px;
+  }
+
+  .stage-body {
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,253,248,0.92);
+    padding:18px 20px;
+  }
+
+  .stage-body h3 { margin-top:0; }
+
+  .stage-body ul { margin-bottom:0; }
+
+  /* Tables */
+  .data-table {
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0 20px;
+    font-size:14px;
+  }
+
+  .data-table th, .data-table td {
+    border:1px solid var(--line);
+    padding:10px 14px;
+    text-align:left;
+    vertical-align:top;
+  }
+
+  .data-table th {
+    background:rgba(238,246,241,0.6);
+    font-weight:600;
+    color:var(--green-deep);
+    font-size:13px;
+  }
+
+  .data-table td { color:var(--ink-soft); }
+
+  /* Matrix */
+  .matrix-grid {
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:12px;
+    margin:16px 0 6px;
+  }
+
+  .matrix-cell {
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,253,248,0.9);
+    padding:16px;
+  }
+
+  .matrix-cell b {
+    display:block;
+    margin-bottom:6px;
+    color:var(--green-deep);
+    font-size:16px;
+  }
+
+  .matrix-cell ul {
+    margin:0;
+    padding-left:1.2em;
+  }
+
+  .matrix-cell li { font-size:14px; color:var(--ink-soft); }
+
+  /* Highlight box */
+  .callout {
+    margin:18px 0;
+    padding:18px 20px;
+    border:1px solid rgba(20,122,95,0.2);
+    border-radius:var(--radius);
+    background:linear-gradient(135deg, rgba(238,246,241,0.96), rgba(254,247,232,0.9));
+  }
+
+  .callout-amber {
+    border-color:rgba(184,120,24,0.25);
+    background:linear-gradient(135deg, rgba(254,247,232,0.96), rgba(255,253,248,0.92));
+  }
+
+  .source-list { margin:0; padding-left:1.3em; }
+  .source-list li { margin:8px 0; overflow-wrap:anywhere; font-size:14px; }
+
+  .ref { font-size:0.85em; white-space:nowrap; color:var(--muted); }
+
+  .footnote {
+    margin-top:16px;
+    color:var(--muted);
+    font-size:14px;
+    font-style:italic;
+  }
+
+  .final-section {
+    border:1px solid rgba(20,122,95,0.28);
+    background:linear-gradient(135deg, rgba(238,246,241,0.98), rgba(254,247,232,0.95));
+  }
+
+  hr {
+    margin:24px 0;
+    border:none;
+    border-top:1px solid var(--line);
+  }
+
+  /* Responsive */
+  @media (max-width:960px) {
+    .hero-grid, .layout { grid-template-columns:1fr; }
+    .hero-visual { border-left:0; border-top:1px solid var(--line); min-height:auto; }
+    .kpi-grid { grid-template-columns:repeat(3, minmax(0,1fr)); }
+    .card-grid-3, .matrix-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .toc { position:static; }
+    .meta-strip { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  }
+
+  @media (max-width:640px) {
+    .page { width:min(100% - 20px, 1180px); padding-top:12px; }
+    .hero-copy, section { padding:22px; }
+    .kpi-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .card-grid-2, .card-grid-3, .matrix-grid { grid-template-columns:1fr; }
+    .meta-strip, .stage { grid-template-columns:1fr; }
+    .meta { border-right:0; border-bottom:1px solid var(--line); }
+    .meta:last-child { border-bottom:0; }
+    .stage-time { justify-content:flex-start; }
+  }
+
+  @media print {
+    body { background:#fff; }
+    .page { width:100%; padding:0; }
+    .toc { position:static; }
+    .hero, section, .toc { box-shadow:none; break-inside:avoid; }
+    a { color:inherit; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="status-badge">内部决策版 · 2026-05-19</p>
+      <h1>广州社区级城市更新趋势总结报告</h1>
+      <p class="hero-lead"><strong>结论</strong>：社区级城市更新与适老化融合不是伪命题，而是被平台口径和命名方式系统性地「藏起来」的长期小颗粒赛道。</p>
+    </div>
+    <div class="hero-visual" aria-label="广州社区微更新数据核心指标示意">
+      <svg viewBox="0 0 560 440" role="img">
+        <title>广州社区级城市更新核心数据</title>
+        <desc>展示从全省10,320条到广州271条再到社区级124条的数据漏斗。</desc>
+        <rect x="100" y="30" width="360" height="44" rx="8" fill="rgba(46,92,124,0.12)" stroke="rgba(46,92,124,0.3)" stroke-width="1.5"/>
+        <text x="280" y="58" text-anchor="middle" font-size="17" fill="#2b5c7c" font-family="Georgia,serif">全省 10,320 条工程设计公告</text>
+        <path d="M280 74 L280 98" stroke="rgba(26,35,32,0.25)" stroke-width="1.5"/>
+        <rect x="140" y="98" width="280" height="44" rx="8" fill="rgba(20,122,95,0.08)" stroke="rgba(20,122,95,0.25)" stroke-width="1.5"/>
+        <text x="280" y="126" text-anchor="middle" font-size="17" fill="#0b4f40" font-family="Georgia,serif">广州 271 条 (2.63%)</text>
+        <path d="M280 142 L280 166" stroke="rgba(26,35,32,0.25)" stroke-width="1.5"/>
+        <rect x="120" y="166" width="320" height="62" rx="8" fill="rgba(184,120,24,0.12)" stroke="rgba(184,120,24,0.35)" stroke-width="2"/>
+        <text x="280" y="192" text-anchor="middle" font-size="17" fill="#8a5c18" font-family="Georgia,serif" font-weight="700">社区级微更新 124 条</text>
+        <text x="280" y="215" text-anchor="middle" font-size="14" fill="#8a5c18" font-family="Georgia,serif">占广州项目 45.8%</text>
+        <path d="M280 228 L280 252" stroke="rgba(162,72,51,0.4)" stroke-width="1.5"/>
+        <rect x="100" y="252" width="360" height="44" rx="8" fill="rgba(162,72,51,0.1)" stroke="rgba(162,72,51,0.3)" stroke-width="1.5"/>
+        <text x="280" y="280" text-anchor="middle" font-size="16" fill="#a24833" font-family="Georgia,serif">仅 1 条标题含「微改造」(0.37%)</text>
+        <line x1="100" y1="316" x2="460" y2="316" stroke="rgba(26,35,32,0.1)" stroke-width="1"/>
+        <text x="280" y="346" text-anchor="middle" font-size="14" fill="#6b7872" font-family="Georgia,serif">市级行动：523 小区开工 + 2.24 万件民生微实事</text>
+        <text x="280" y="370" text-anchor="middle" font-size="14" fill="#6b7872" font-family="Georgia,serif">投资计划 1,800 亿元 · 累计改造 1,277 个小区</text>
+        <text x="280" y="410" text-anchor="middle" font-size="13" fill="#8a908b" font-family="Georgia,serif">结论：赛道真实，但需要更换「捕捉镜头」</text>
+      </svg>
+    </div>
+  </div>
+  <div class="meta-strip">
+    <div class="meta"><strong>10,320</strong><span>全省公告总量<br>(2026.1-5.14)</span></div>
+    <div class="meta"><strong>271</strong><span>广州项目数<br>占全省 2.63%</span></div>
+    <div class="meta"><strong>124 / 45.8%</strong><span>判别为社区级<br>微更新项目</span></div>
+    <div class="meta"><strong>1 / 0.37%</strong><span>标题含「微改造」<br>命名偏差的代价</span></div>
+    <div class="meta"><strong>2.24 万件</strong><span>年度民生微实事<br>巨大的隐形层</span></div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="报告目录">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#s1">核心结论</a></li>
+      <li><a href="#s2">误判溯源</a></li>
+      <li><a href="#s3">三层验证</a></li>
+      <li><a href="#s4">10 人团队适配</a></li>
+      <li><a href="#s5">2026 下半年部署</a></li>
+      <li><a href="#s6">渠道矩阵</a></li>
+      <li><a href="#s7">决策建议</a></li>
+      <li><a href="#references">数据来源</a></li>
+    </ol>
+  </nav>
+
+  <main class="report">
+
+    <section id="s1" class="feature">
+      <h2>一、核心结论</h2>
+
+      <blockquote>
+        <strong>「社区级城市更新（含适老化融合）」不是伪命题，而是被平台口径、命名偏差和项目颗粒度三层过滤后，在省级招标平台视角下显得「不主流」的确定性长期赛道。</strong>
+      </blockquote>
+
+      <div class="kpi-grid" aria-label="5 个关键数字">
+        <div class="kpi"><span class="num">0.37%</span><span class="label">标题含微改造的<br>广州项目占比</span></div>
+        <div class="kpi highlight"><span class="num">45.8%</span><span class="label">放宽关键词后<br>真实社区级占比</span></div>
+        <div class="kpi"><span class="num">23.3%</span><span class="label">广州 &le;10 万小额<br>项目占比(全省 3 倍)</span></div>
+        <div class="kpi"><span class="num">~330 条/年</span><span class="label">中介超市社区级<br>项目年化估算</span></div>
+        <div class="kpi"><span class="num">2.24 万件</span><span class="label">广州年度民生微实事<br>大多数不进入工程设计</span></div>
+      </div>
+
+      <p>对事务所而言，关键判断只有两点：</p>
+      <ol>
+        <li><strong>这个方向真实存在，体量可观。</strong>即使在中介超市窄口径下，社区级微更新项目仍占广州工程设计采购的 45.8%；叠加区街道和市级宏观数据后，这个比例只高不低。</li>
+        <li><strong>不能用「找大项目」的望远镜去看它。</strong>它天然以「小而散」形态分布在街道、区住建、学校、医院等主体，需要换一种捕获方式。</li>
+      </ol>
+    </section>
+
+    <section id="s2">
+      <h2>二、「找不到项目」的三个根源</h2>
+      <p>为什么在平台上看不到？三个过滤层叠加导致系统性地低估了这个赛道的真实存在量：</p>
+
+      <div class="card-grid-3" aria-label="三个误判根源">
+        <div class="card"><b>命名偏差</b><p>「微改造」是政策语言，不是招标语言。业主写的标题用「改造、修缮、提升、环境整治、装修」等操作词，而不是照抄政策术语。全省仅 11 条标题含微改造/微更新/微整治。</p></div>
+        <div class="card"><b>平台偏差</b><p>大量社区级项目不上省级中介超市：走区级招投标平台、政府采购网、街道比选公告、直接委托。民生微实事中的工程设计类项几乎全部在这一层不可见。</p></div>
+        <div class="card"><b>颗粒偏差</b><p>单个老旧小区改造项目可拆成若干设计包/监理包/施工包，或设计+施工一体打包。许多小额改造不单列 007 工程设计，直接走工程发包。</p></div>
+      </div>
+
+      <div class="diagram" aria-label="中介超市在整体交易地图中的位置">
+        <div class="diagram-title"><span>中介超市只是整体交易地图的一块拼图</span><span>数据口径差异示意</span></div>
+        <svg viewBox="0 0 960 280" role="img">
+          <title>交易渠道层级对照</title>
+          <desc>展示中介超市、政府采购平台、街道比选、直接委托四个渠道的相互关系和覆盖范围。</desc>
+          <rect x="28" y="24" width="190" height="56" rx="6" fill="rgba(20,122,95,0.1)" stroke="rgba(20,122,95,0.3)" stroke-width="1.5"/>
+          <text x="123" y="58" text-anchor="middle" font-size="15" fill="#0b4f40" font-family="Georgia,serif">省级中介超市</text>
+          <text x="123" y="74" text-anchor="middle" font-size="12" fill="#6b7872" font-family="Georgia,serif">本次数据来源</text>
+
+          <rect x="260" y="18" width="190" height="68" rx="6" fill="rgba(184,120,24,0.08)" stroke="rgba(184,120,24,0.25)" stroke-width="1.5"/>
+          <text x="355" y="52" text-anchor="middle" font-size="15" fill="#8a5c18" font-family="Georgia,serif">政府采购平台</text>
+          <text x="355" y="72" text-anchor="middle" font-size="12" fill="#6b7872" font-family="Georgia,serif">区级工程服务采购</text>
+
+          <rect x="492" y="12" width="190" height="80" rx="6" fill="rgba(46,92,124,0.08)" stroke="rgba(46,92,124,0.25)" stroke-width="1.5"/>
+          <text x="587" y="46" text-anchor="middle" font-size="15" fill="#2b5c7c" font-family="Georgia,serif">街道比选/询比</text>
+          <text x="587" y="66" text-anchor="middle" font-size="12" fill="#6b7872" font-family="Georgia,serif">小额工程+服务</text>
+          <text x="587" y="82" text-anchor="middle" font-size="12" fill="#6b7872" font-family="Georgia,serif">民生微实事工程类</text>
+
+          <rect x="724" y="24" width="190" height="56" rx="6" fill="rgba(162,72,51,0.08)" stroke="rgba(162,72,51,0.25)" stroke-width="1.5"/>
+          <text x="819" y="58" text-anchor="middle" font-size="15" fill="#a24833" font-family="Georgia,serif">直接委托</text>
+          <text x="819" y="74" text-anchor="middle" font-size="12" fill="#6b7872" font-family="Georgia,serif">街道/物业/业委会</text>
+
+          <line x1="218" y1="52" x2="260" y2="52" stroke="rgba(26,35,32,0.15)" stroke-width="1"/>
+          <line x1="450" y1="52" x2="492" y2="52" stroke="rgba(26,35,32,0.15)" stroke-width="1"/>
+          <line x1="682" y1="52" x2="724" y2="52" stroke="rgba(26,35,32,0.15)" stroke-width="1"/>
+
+          <rect x="28" y="124" width="886" height="130" rx="8" fill="rgba(26,35,32,0.02)" stroke="rgba(26,35,32,0.08)" stroke-width="1" stroke-dasharray="6,3"/>
+          <text x="471" y="152" text-anchor="middle" font-size="16" fill="#1a2320" font-family="Georgia,serif" font-weight="700">实际发生的社区级城市更新行动总量</text>
+          <text x="471" y="178" text-anchor="middle" font-size="14" fill="#6b7872" font-family="Georgia,serif">523 老旧小区开工 + 319 绿地公共空间 + 295 品质提升 + 2.24 万件民生微实事</text>
+          <text x="471" y="202" text-anchor="middle" font-size="14" fill="#6b7872" font-family="Georgia,serif">市、区两级多部门多渠道分散发布 · 大量项目无需设计资质 · 估计全年 2,000-3,000 个工程/设计动作以上</text>
+          <text x="471" y="240" text-anchor="middle" font-size="13" fill="#a24833" font-family="Georgia,serif">中介超市可见量仅为交易环节子集的一个切片</text>
+        </svg>
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2>三、三层验证：从 0.37% 到 45.8% 的完整证据链</h2>
+
+      <h3>第一层：中介超市内部验证</h3>
+      <p>不限于「微改造」三个字，将关键词范围扩大到：改造、修缮、提升、环境整治、绿化、景观、校园、医院、社区、装修、围墙、操场、宿舍、食堂、邻里、美化、整饰、整治。从 271 条广州项目中筛出 153 条候选，逐条判断。</p>
+
+      <table class="data-table">
+        <thead><tr><th>分类</th><th>数量</th><th>占 153</th><th>占 271</th></tr></thead>
+        <tbody>
+          <tr><td>社区/校园/医院-微更新</td><td>80</td><td>52.3%</td><td><strong>29.5%</strong></td></tr>
+          <tr><td>环境整治/景观-微更新</td><td>6</td><td>3.9%</td><td>2.2%</td></tr>
+          <tr><td>其他修缮/改造类</td><td>38</td><td>24.8%</td><td>14.0%</td></tr>
+          <tr><td>机构内部-不适用</td><td>5</td><td>3.3%</td><td>1.8%</td></tr>
+          <tr><td>不匹配（大型工程等）</td><td>24</td><td>15.7%</td><td>8.9%</td></tr>
+          <tr style="background:rgba(238,246,241,0.5);"><td><strong>合计判别为社区级微更新</strong></td><td><strong>124</strong></td><td><strong>81.0%</strong></td><td><strong>45.8%</strong></td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>8 条原公告抽样全部确认</strong>为社区级空间更新。典型特征：业主是街道办、居委会、学校、社区卫生服务中心；服务内容是方案/施工图/预算/竣工图；金额多在几万到几十万。</p>
+
+      <table class="data-table">
+        <thead><tr><th>典型项目</th><th>业主</th><th>金额</th></tr></thead>
+        <tbody>
+          <tr><td>三眼井社区邻里中心修缮项目</td><td>越秀区洪桥街道</td><td>44.7 万</td></tr>
+          <tr><td>中心大院老年人活动区改造</td><td>市养老服务指导中心</td><td>910m&sup2;</td></tr>
+          <tr><td>棠德花苑老旧小区改造初步设计</td><td>天河区棠下街道</td><td>55 万 m&sup2;</td></tr>
+          <tr><td>海幢街社区卫生服务中心改造</td><td>海珠区海幢街</td><td>387 万</td></tr>
+          <tr><td>人和镇方石村环境整治工程</td><td>白云区人和镇</td><td>79 万</td></tr>
+        </tbody>
+      </table>
+
+      <h3>第二层：区/街道口径验证（以荔湾区为例）</h3>
+
+      <table class="data-table">
+        <thead><tr><th>指标</th><th>2024 年数据</th><th>2025 年计划</th></tr></thead>
+        <tbody>
+          <tr><td>老旧小区完工</td><td>6 个</td><td>—</td></tr>
+          <tr><td>老旧小区推进微改造</td><td>25 个</td><td>14 个项目共 29 个小区</td></tr>
+          <tr><td>新增口袋公园</td><td>9 个</td><td>—</td></tr>
+          <tr><td>公共空间改造</td><td>30 处</td><td>—</td></tr>
+          <tr><td>建筑外立面修缮</td><td>323 处</td><td>—</td></tr>
+          <tr><td>小微空间体育设施</td><td>—</td><td>不少于 100 个</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>仅荔湾一区，一年的微更新动作量就已接近中介超市全市年化社区级项目数（~330 条）。</strong>推论：全市 11 个区的社区微更新行动规模，保守估计在每年 2,000-3,000 个工程/设计动作以上。</p>
+
+      <h3>第三层：广州市宏观行动对标</h3>
+
+      <table class="data-table">
+        <thead><tr><th>维度</th><th>数据来源</th><th>数值</th></tr></thead>
+        <tbody>
+          <tr><td>中介超市广州年化</td><td>本次数据 (4.5 个月)</td><td>~720 条/年（社区级约 330 条/年）</td></tr>
+          <tr><td>2024 老旧小区改造开工</td><td>市政府工作报告</td><td><strong>523 个</strong></td></tr>
+          <tr><td>2024 新增社区绿地/公共空间</td><td>市政府工作报告</td><td><strong>319 个</strong></td></tr>
+          <tr><td>2024 城市品质提升项目</td><td>市政府工作报告</td><td><strong>295 个</strong></td></tr>
+          <tr><td>2024 民生微实事</td><td>市政府工作报告</td><td>累计 <strong>2.24 万件</strong></td></tr>
+          <tr><td>2025 城市更新投资计划</td><td>市政府工作报告</td><td><strong>1,800 亿元</strong></td></tr>
+          <tr><td>累计完成老旧小区改造</td><td>市委网信办</td><td><strong>1,277 个</strong>小区</td></tr>
+        </tbody>
+      </table>
+
+      <blockquote>
+        中介超市只是众多交易渠道之一，且只承载了部分设计采购环节。<br>
+        真正发生的社区更新行动，远大于平台可见数据。
+      </blockquote>
+    </section>
+
+    <section id="s4">
+      <h2>四、为什么这个赛道适合 10 人团队</h2>
+
+      <div class="card-grid-2" aria-label="团队适配分析">
+        <div class="card"><b>项目体量匹配</b><p>单个社区微更新项目设计费多在几万到几十万，大院觉得「鸡肋」，10 人团队可以做多个项目快周转。广州金额数据显示中位数 50 万，10 万以下项目占 23.3%。</p></div>
+        <div class="card"><b>能力映射</b><p>公建+工厂+室内背景恰好可以转译为：老旧小区公共空间改造、适老化无障碍节点、老厂房活化、社区功能微重组。</p></div>
+      </div>
+
+      <div class="card-grid-3" aria-label="适合团队的三类切入口">
+        <div class="card"><b>老旧小区公共空间</b><p>社区广场改造、架空层激活、楼下灰空间利用、小型便民服务点。2026 年政策明确这类项目可免于规划许可。</p></div>
+        <div class="card"><b>适老化与无障碍</b><p>坡道、电梯加装方案优化、老年活动空间改造、公共卫生间适老化、照明导视系统。《既有社区适老化改造技术规程》2026 年实施。</p></div>
+        <div class="card"><b>口袋公园与微绿地</b><p>设计周期短（2-4 周/方案），易形成系列化作品和品牌积累。各地城市更新导则均将其列为常规抓手。</p></div>
+      </div>
+
+      <h3>建议业务主轴组合</h3>
+
+      <div class="diagram" aria-label="业务主轴组合图">
+        <div class="diagram-title"><span>三线协同</span><span>高频现金流 + 标杆利润 + 顾问补充</span></div>
+        <svg viewBox="0 0 960 300" role="img">
+          <title>业务主轴组合</title>
+          <desc>社区微更新适老化为主轴、老厂房活化为利润支柱、公建绿色改造为顾问补充的三线协同。</desc>
+          <rect x="48" y="60" width="270" height="170" rx="8" fill="rgba(20,122,95,0.08)" stroke="rgba(20,122,95,0.3)" stroke-width="2"/>
+          <text x="183" y="110" text-anchor="middle" font-size="22" fill="#0b4f40" font-family="Georgia,serif" font-weight="700">社区微更新</text>
+          <text x="183" y="135" text-anchor="middle" font-size="22" fill="#0b4f40" font-family="Georgia,serif" font-weight="700">+ 适老化</text>
+          <text x="183" y="172" text-anchor="middle" font-size="14" fill="#6b7872" font-family="Georgia,serif">高频 / 快周转 / 样板积累</text>
+          <text x="183" y="200" text-anchor="middle" font-size="14" fill="#0b4f40" font-family="Georgia,serif" font-weight="600">建议设为主轴</text>
+
+          <rect x="355" y="42" width="250" height="210" rx="8" fill="rgba(184,120,24,0.08)" stroke="rgba(184,120,24,0.25)" stroke-width="2"/>
+          <text x="480" y="108" text-anchor="middle" font-size="22" fill="#8a5c18" font-family="Georgia,serif" font-weight="700">老厂房</text>
+          <text x="480" y="140" text-anchor="middle" font-size="22" fill="#8a5c18" font-family="Georgia,serif" font-weight="700">更新活化</text>
+          <text x="480" y="176" text-anchor="middle" font-size="14" fill="#6b7872" font-family="Georgia,serif">标杆型 / 设计费更高</text>
+          <text x="480" y="200" text-anchor="middle" font-size="14" fill="#8a5c18" font-family="Georgia,serif" font-weight="600">利润支柱</text>
+
+          <rect x="642" y="78" width="250" height="140" rx="8" fill="rgba(46,92,124,0.08)" stroke="rgba(46,92,124,0.2)" stroke-width="2"/>
+          <text x="767" y="128" text-anchor="middle" font-size="22" fill="#2b5c7c" font-family="Georgia,serif" font-weight="700">公建绿色改造</text>
+          <text x="767" y="166" text-anchor="middle" font-size="14" fill="#6b7872" font-family="Georgia,serif">顾问式 / 低试错成本</text>
+          <text x="767" y="190" text-anchor="middle" font-size="14" fill="#2b5c7c" font-family="Georgia,serif" font-weight="600">轻量补充</text>
+
+          <line x1="318" y1="145" x2="355" y2="145" stroke="rgba(26,35,32,0.15)" stroke-width="1.5"/>
+          <line x1="605" y1="147" x2="642" y2="147" stroke="rgba(26,35,32,0.15)" stroke-width="1.5"/>
+
+          <text x="475" y="282" text-anchor="middle" font-size="15" fill="#1a2320" font-family="Georgia,serif">把原有公建、工厂、室内能力接入「城市更新」总线</text>
+        </svg>
+      </div>
+    </section>
+
+    <section id="s5">
+      <h2>五、2026 下半年：以「拿样板」为目标的四阶段推进</h2>
+
+      <div class="timeline" aria-label="2026 下半年四阶段时间轴">
+        <div class="stage">
+          <div class="stage-time">5 - 6 月</div>
+          <div class="stage-body">
+            <h3>阶段 1：验证市场 + 组建小队</h3>
+            <ul>
+              <li><strong>锁定 3-5 个重点街道</strong>：老旧小区密度高、有城中村或老厂区、属于更新示范片区的街道</li>
+              <li><strong>建立内部样本库</strong>：从 124 条已筛项目按类型/金额/业主归类，形成「值不值得投」的快速判断参照</li>
+              <li><strong>组建 2-3 人微更新核心小组</strong>：1 人统筹对接 + 1-2 人方案施工图，明确今年目标为至少 2-3 个可展示案例</li>
+              <li><strong>补齐基础工具</strong>：学习《既有社区适老化改造技术规程》，输出内部 10-20 页「适老化+微更新设计要点」手册</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-time">7 - 8 月</div>
+          <div class="stage-body">
+            <h3>阶段 2：拿下 2-3 个样板项目</h3>
+            <ul>
+              <li><strong>两条获客线</strong>：拜访重点街道城建科/社区治理办，带作品+设计要点手册，提出「免费帮做 1-2 个社区微更新初步方案」的合作引子；寻找老旧小区有诉求但缺资源的业委会/物业，提供小型改造全流程导航</li>
+              <li><strong>项目优先级</strong>：单一节点（口袋公园、健身角、连廊） &rarr; 小区内部适老化改造 &rarr; 老旧小区整体公共空间改造</li>
+              <li><strong>报价策略</strong>：前 2-3 个项目设计费可略低于市场，换取署名权和完整展示权，清晰区分概念方案和施工图的价格边界</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-time">9 - 10 月</div>
+          <div class="stage-body">
+            <h3>阶段 3：打磨方法论，做成「可复制产品」</h3>
+            <ul>
+              <li><strong>项目复盘 &rarr; 产品化</strong>：标准调研清单、标准空间模块库（200-500m&sup2; 老人活动场地、300-1000m&sup2; 口袋公园模块、无障碍路径标准模块）、标配图纸模板</li>
+              <li><strong>对外展示</strong>：制作「城市微更新/适老化社区案例册」，在专业平台发 1-2 篇案例解读，关键词用「小团队、快速响应、居民参与」「适老友好社区」「口袋公园」</li>
+              <li><strong>扩展合作方</strong>：物色 2-3 家本地靠谱施工/运营团队形成默认合作，对街道提供「方案+施工」一揽子入口</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="stage-time">11 - 12 月</div>
+          <div class="stage-body">
+            <h3>阶段 4：评估是否升级为主力板块</h3>
+            <ul>
+              <li><strong>评估维度</strong>：项目数量（&ge;5 个？）、合同额与利润率（可接受+现金流稳定？）、与 1-2 个街道/区的长期合作关系、内部是否有负责人/代言人</li>
+              <li><strong>协同效果</strong>：微更新是否引出了老厂房活化或小型公建改造？适老化社区是否引出了室内精装修/养老设施设计？</li>
+              <li><strong>决策</strong>：如果达标，将本方向确立为 2027 年事务所官网和对外沟通的「第一关键词」之一</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s6">
+      <h2>六、渠道矩阵：别再只盯中介超市</h2>
+
+      <table class="data-table">
+        <thead><tr><th>渠道</th><th>主攻对象</th><th>适用项目类型</th><th>建议关键词</th></tr></thead>
+        <tbody>
+          <tr><td><strong>区住建局/城更部门</strong></td><td>区级老旧小区改造、城市品质提升项目库</td><td>老旧小区局部公共空间、架空层、小型配套建筑设计包</td><td>老旧小区改造、微改造、品质提升、示范片区</td></tr>
+          <tr><td><strong>街道办</strong></td><td>民生微实事、小额工程比选/询比公告</td><td>口袋公园、社区广场、健身角、灰空间激活、便民服务点</td><td>民生微实事、环境整治、社区微更新、绿化景观</td></tr>
+          <tr><td><strong>教育/卫健系统</strong></td><td>校园修缮、社区卫生服务中心改造项目</td><td>学校装修/修缮/功能优化、社区医院适老化无障碍改造</td><td>修缮、改造、装修、功能优化、适老化</td></tr>
+          <tr><td><strong>中介超市/政府采购网</strong></td><td>&ge;一定金额的设计采购公告</td><td>持续监测，用关键词矩阵替代「微改造」单点搜索</td><td>社区、街道、邻里中心、老旧小区、养老、无障碍、口袋公园</td></tr>
+        </tbody>
+      </table>
+
+      <div class="matrix-grid" aria-label="关键词矩阵">
+        <div class="matrix-cell"><b>主关键词</b><ul><li>社区 / 街道 / 邻里中心</li><li>老旧小区 / 养老 / 康复</li><li>校园 / 卫生服务中心</li><li>口袋公园 / 绿地 / 公共空间</li><li>架空层 / 灰空间</li></ul></div>
+        <div class="matrix-cell"><b>配套词</b><ul><li>修缮 / 改造 / 提升</li><li>整治 / 装修 / 环境整治</li><li>适老化 / 无障碍</li><li>景观优化 / 绿化</li></ul></div>
+        <div class="matrix-cell"><b>排除词</b><ul><li>公安 / 看守所 / 法院</li><li>监狱 / 纪委监委</li><li>大型市政道路 / 桥梁</li><li>纯水利 / 纯电力</li></ul></div>
+      </div>
+    </section>
+
+    <section id="s7" class="final-section">
+      <h2>七、决策建议</h2>
+
+      <ol>
+        <li><strong>把这个方向确立为 2026 下半年主攻方向之一。</strong>有完整的证据链证明它不是伪命题。广州 45.8% 的中介超市工程设计项目本质上是社区级微更新，加之市/区级行动规模，这是一个政策强驱动、资金确定、持续多年的「硬方向」。</li>
+
+        <li><strong>不要再以「标题中有没有微改造」判断赛道存在。</strong>用实际招标用语（改造/修缮/提升/环境整治/社区）替代政策术语搜索，用渠道矩阵替代单一平台巡检。</li>
+
+        <li><strong>2026 下半年的核心目标不是「再调研」，而是「用项目定赛道」。</strong>
+          <ul>
+            <li>拿下 2-3 个典型社区微更新项目（老年活动区、口袋公园、邻里中心优先）</li>
+            <li>与 2-3 个街道或区部门建立稳定合作关系</li>
+            <li>把本次分析报告本身作为对外材料 &mdash; 「我们认真研究了这个领域，这本身就是诚意和专业性」</li>
+          </ul>
+        </li>
+
+        <li><strong>以社区微更新+适老化为主轴，老厂房活化为利润支柱，公建绿色改造为轻量补充。</strong>关键是让原有公建、工厂、室内能力通过「城市更新」总线重新连接，形成 1+1+1 &gt; 3 的效果。</li>
+
+        <li><strong>到年底按项目数、合同额、利润率、合作关系、样板沉淀五个维度做量化评估。</strong>如果数据达标，2027 年将其确立为事务所对外核心关键词。</li>
+      </ol>
+
+      <hr>
+
+      <div class="callout callout-amber">
+        <p style="margin:0;"><strong>一句话版内部结论</strong>：中介超市上有 45.8% 的项目是你的赛道，中介超市外还有 2.24 万件/年民生微实事和 523 个/年老旧小区改造在等你 &mdash; 不是市场不存在，是你之前的镜头分辨率不对。</p>
+      </div>
+    </section>
+
+    <section id="references">
+      <h2>数据来源与口径说明</h2>
+      <ul class="source-list">
+        <li><strong>中介超市数据</strong>：广东省网上中介服务超市采购公告，发布时间 2026-01-01 至 2026-05-14，服务类型勾选工程设计（007），去重后 10,320 条，其中广州 271 条。来源：广东省网上中介服务超市 <code>ygp.gdzwfw.gov.cn</code></li>
+        <li><strong>市级数据</strong>：2025 年广州市政府工作报告；广州市住建局 2024 年工作总结和 2025 年工作计划</li>
+        <li><strong>区级数据</strong>：荔湾区 2024 年计划执行情况与 2025 年计划草案；花都区新华街 2024 年工作总结；南沙区 2025 年政府工作报告（摘要）</li>
+        <li><strong>城市更新政策</strong>：重庆市城市更新技术导则（2026）；全国住房城乡建设工作会议（2025.12）；人民日报社区微更新项目可免于规划许可政策解读（2026.01）</li>
+        <li><strong>适老化标准</strong>：中国建筑学会《既有社区适老化改造技术规程》（2026 年实施公告）</li>
+        <li><strong>广州案例</strong>：花地街道民治社区微改造项目询比公告；各区老旧小区改造「口袋公园」案例报道</li>
+        <li><strong>本地数据文件</strong>：<code>06_OUTPUTS/20260514_工程设计招标分析/</code> 目录下的明细 CSV 与统计摘要 JSON</li>
+      </ul>
+      <p class="footnote">本报告为单文件离线 HTML，内嵌 CSS/SVG，可直接打开、打印或另存 PDF。内部决策版，如需对外使用请调整措辞。</p>
+    </section>
+
+  </main>
+</div>
+</div>
+</body>
+</html>
