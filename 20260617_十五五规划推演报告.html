@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>十五五规划推演报告 · 建筑设计行业</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { background:#fafaf7; font-family:'Inter','Noto Sans SC',sans-serif; color:#15140f; -webkit-font-smoothing:antialiased; }
+  .num { font-family:'Inter',sans-serif; font-feature-settings:'tnum' on; letter-spacing:-0.02em; }
+  .section h2 { font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#5a564e; margin:0 0 16px; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  thead th { background:#f4f1ec; text-align:left; padding:10px 14px; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#5a564e; position:sticky; top:0; }
+  tbody td { padding:10px 14px; border-bottom:1px solid #e7e5e0; }
+  tbody tr:nth-child(even) { background:#fbfaf7; }
+  tbody tr:hover { background:#f4f1ec; }
+  .delta-up { color:#1f7a3a; font-weight:600; }
+  .delta-down { color:#9c2a25; font-weight:600; }
+  .tag { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
+  .tag-green { background:#e6f4ea; color:#1e7a3a; }
+  .tag-amber { background:#fef7e0; color:#b45309; }
+  .tag-blue { background:#e8f0fe; color:#1a56db; }
+  .tag-red { background:#fde8e8; color:#9c2a25; }
+  .tag-purple { background:#f3e8ff; color:#7c3aed; }
+  .timeline-dot { width:12px; height:12px; border-radius:50%; border:2px solid; display:inline-block; }
+  .card-hover { transition:transform 0.2s,box-shadow 0.2s; }
+  .card-hover:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,0.08); }
+  .icon-box { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+</style>
+</head>
+<body>
+
+<div class="max-w-7xl mx-auto px-8 py-12">
+
+  <!-- Header -->
+  <header class="pb-7 mb-8 border-b border-[#e7e5e0]">
+    <div class="flex items-baseline justify-between flex-wrap gap-3">
+      <div>
+        <div class="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#c96442] mb-2">Strategic Foresight Report</div>
+        <h1 class="text-4xl font-extrabold tracking-tight">十五五规划推演报告</h1>
+        <p class="text-lg text-[#5a564e] mt-2">建筑设计行业 · 10人以下事务所专项</p>
+      </div>
+      <div class="text-xs text-[#5a564e] text-right">
+        <div>政策来源：<span class="font-semibold text-[#15140f]">国务院《城市更新"十五五"规划》</span></div>
+        <div>生成日期：<span class="font-mono text-[#15140f]">2026-06-17</span></div>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-[#5a564e] max-w-3xl leading-relaxed">本报告从政策趋势、时间轴演化、事务所打法三个维度，推演未来5年建筑设计行业的结构性变化与10人以下建筑事务所的生存策略。</p>
+  </header>
+
+  <!-- KPI Cards -->
+  <section class="section mb-10">
+    <h2>核心政策信号</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] shadow-[0_1px_0_#f0ece5] card-hover">
+        <div class="icon-box bg-[#e8f0fe] mb-3">🏗️</div>
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-[#5a564e] mb-2">主战场转移</div>
+        <div class="text-2xl font-extrabold num">存量更新</div>
+        <div class="text-xs mt-2 text-[#5a564e]">从新城建设 → 老旧小区/城中村/厂区改造</div>
+      </div>
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] shadow-[0_1px_0_#f0ece5] card-hover">
+        <div class="icon-box bg-[#e6f4ea] mb-3">🌿</div>
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-[#5a564e] mb-2">硬门槛</div>
+        <div class="text-2xl font-extrabold num">绿色低碳</div>
+        <div class="text-xs mt-2 text-[#5a564e]">超低能耗 + 装配式 + 绿色建材 + CIM/BIM</div>
+      </div>
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] shadow-[0_1px_0_#f0ece5] card-hover">
+        <div class="icon-box bg-[#fef7e0] mb-3">📐</div>
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-[#5a564e] mb-2">设计原则</div>
+        <div class="text-2xl font-extrabold num">适用经济</div>
+        <div class="text-xs mt-2 text-[#5a564e]">超高层受限 · "好房子""小而美"成主流</div>
+      </div>
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] shadow-[0_1px_0_#f0ece5] card-hover">
+        <div class="icon-box bg-[#f3e8ff] mb-3">🔄</div>
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-[#5a564e] mb-2">服务升级</div>
+        <div class="text-2xl font-extrabold num">全过程咨询</div>
+        <div class="text-xs mt-2 text-[#5a564e]">从画图 → 体检+策划+实施+运营全链路</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part 1: Four Major Trends -->
+  <section class="section mb-10">
+    <h2>一、政策驱动的四大趋势</h2>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <!-- Trend 1 -->
+      <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="icon-box bg-[#e8f0fe] shrink-0">🏚️</div>
+          <div>
+            <h3 class="font-bold text-base mb-1">趋势一：从"新城建设"转向"存量更新"</h3>
+            <p class="text-sm text-[#5a564e] leading-relaxed">重点转向老旧小区、危旧房、城中村更新；老旧厂区/街区/交通枢纽改造；地下管网、生命线工程、平急两用设施等系统性更新。</p>
+          </div>
+        </div>
+        <div class="bg-[#f8f7f4] rounded-xl p-4">
+          <div class="text-xs font-semibold text-[#5a564e] mb-2">对设计的直接含义</div>
+          <ul class="text-xs text-[#5a564e] space-y-1.5">
+            <li>• 项目平均体量"碎片化+组合化"：几十万平米以下的片区改造</li>
+            <li>• 设计任务从"画新东西"变成"在复杂存量约束下做手术"</li>
+            <li>• 需掌握：结构安全、机电改造、消防、适老化、节能、风貌保护</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Trend 2 -->
+      <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="icon-box bg-[#e6f4ea] shrink-0">🚫</div>
+          <div>
+            <h3 class="font-bold text-base mb-1">趋势二：超高层受限，"好房子"成主流</h3>
+            <p class="text-sm text-[#5a564e] leading-relaxed">强化"适用、经济、绿色、美观"，严格限制超高层建筑，提升住宅建筑设计品质。普通住宅、多层公建、社区级空间需求常态化。</p>
+          </div>
+        </div>
+        <div class="bg-[#f8f7f4] rounded-xl p-4">
+          <div class="text-xs font-semibold text-[#5a564e] mb-2">对小所的利好</div>
+          <ul class="text-xs text-[#5a564e] space-y-1.5">
+            <li>• 超高层和全国地标型项目本来就很难轮到小团队</li>
+            <li>• "好房子""完整社区""小而美公共空间"更易由中小事务所承接</li>
+            <li>• 项目数量大但单个合同金额中小，适合小团队产能</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Trend 3 -->
+      <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="icon-box bg-[#fef7e0] shrink-0">⚡</div>
+          <div>
+            <h3 class="font-bold text-base mb-1">趋势三：绿色+数字化成为硬门槛</h3>
+            <p class="text-sm text-[#5a564e] leading-relaxed">大力发展绿色建筑，推动超低能耗、低碳建筑规模化；推广装配式建筑和绿色施工；建立建筑能效等级制度；推进CIM平台建设。</p>
+          </div>
+        </div>
+        <div class="bg-[#f8f7f4] rounded-xl p-4">
+          <div class="text-xs font-semibold text-[#5a564e] mb-2">对设计的含义</div>
+          <ul class="text-xs text-[#5a564e] space-y-1.5">
+            <li>• "只会画方案"不够用了</li>
+            <li>• 需要把能耗、碳排、装配式构造、运维成本、CIM/BIM数据接口都考虑进设计</li>
+            <li>• 会用BIM/CIM、能做能耗模拟的团队报价更高、更易胜出</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Trend 4 -->
+      <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="icon-box bg-[#f3e8ff] shrink-0">🔗</div>
+          <div>
+            <h3 class="font-bold text-base mb-1">趋势四：设计服务走向"全过程咨询+运营导向"</h3>
+            <p class="text-sm text-[#5a564e] leading-relaxed">建立"专项规划—片区策划—项目实施方案"实施体系，培育城市更新专业化运营机构。</p>
+          </div>
+        </div>
+        <div class="bg-[#f8f7f4] rounded-xl p-4">
+          <div class="text-xs font-semibold text-[#5a564e] mb-2">高价值设计服务内涵</div>
+          <ul class="text-xs text-[#5a564e] space-y-1.5">
+            <li>• 城市体检与诊断（问题发现与指标体系）</li>
+            <li>• 片区更新策划与城市设计</li>
+            <li>• 项目实施方案、投资测算与运营模式建议</li>
+            <li>• 后期绩效评估与运营空间优化</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part 2: Timeline Chart -->
+  <section class="section mb-10">
+    <h2>二、时间轴：2026 → 2030 风向演化</h2>
+    <div class="grid lg:grid-cols-3 gap-4">
+      <div class="lg:col-span-2 rounded-2xl bg-white p-5 border border-[#e7e5e0]">
+        <div class="text-sm font-semibold mb-3">行业热度与机会分布预测</div>
+        <div style="position:relative;height:300px"><canvas id="chart-timeline"></canvas></div>
+      </div>
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0]">
+        <div class="text-sm font-semibold mb-3">项目类型分布变化</div>
+        <div style="position:relative;height:300px"><canvas id="chart-project-type"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Detail Cards -->
+  <section class="section mb-10">
+    <h2>阶段性风向详解</h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <!-- 2026 -->
+      <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="timeline-dot bg-[#1a56db] border-[#1a56db]"></div>
+          <div>
+            <div class="text-xs font-bold text-[#1a56db]">2026年</div>
+            <div class="font-bold text-base">上游年 · 规则落地</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-[#f8f7f4] rounded-xl p-3">
+            <div class="text-xs font-semibold text-[#5a564e] mb-1.5">政策状态</div>
+            <ul class="text-xs text-[#5a564e] space-y-1">
+              <li>• 各地做城市体检</li>
+              <li>• 编制"十五五"城市更新专项规划</li>
+              <li>• 建立城市更新项目库</li>
+              <li>• 细化本地导则和操作规程</li>
+            </ul>
+          </div>
+          <div class="bg-[#e8f0fe] rounded-xl p-3">
+            <div class="text-xs font-semibold text-[#1a56db] mb-1.5">小所切入点</div>
+            <ul class="text-xs text-[#1a56db] space-y-1">
+              <li>• 前期轻量服务：微更新策略、小区体检报告</li>
+              <li>• 小尺度样板段设计</li>
+              <li>• 与本地甲级院建立合作</li>
+            </ul>
+          </div>
+          <div class="text-xs text-[#9c2a25] bg-[#fde8e8] rounded-xl p-3">
+            <span class="font-semibold">风险：</span>前期研究类项目合同金额小，回款节奏慢
+          </div>
+        </div>
+      </div>
+      <!-- 2027 -->
+      <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="timeline-dot bg-[#b45309] border-[#b45309]"></div>
+          <div>
+            <div class="text-xs font-bold text-[#b45309]">2027年</div>
+            <div class="font-bold text-base">中游年 · 实施高峰</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-[#f8f7f4] rounded-xl p-3">
+            <div class="text-xs font-semibold text-[#5a564e] mb-1.5">政策状态</div>
+            <ul class="text-xs text-[#5a564e] space-y-1">
+              <li>• 大规模启动老旧小区/城中村改造</li>
+              <li>• 管网更新、平急两用设施建设</li>
+              <li>• 招投标高峰到来</li>
+            </ul>
+          </div>
+          <div class="bg-[#fef7e0] rounded-xl p-3">
+            <div class="text-xs font-semibold text-[#b45309] mb-1.5">小所机会</div>
+            <ul class="text-xs text-[#b45309] space-y-1">
+              <li>• 单体与小尺度更新设计</li>
+              <li>• 大项目中的分项设计/专业分包</li>
+              <li>• 历史街区与工业遗产活化</li>
+            </ul>
+          </div>
+          <div class="text-xs text-[#9c2a25] bg-[#fde8e8] rounded-xl p-3">
+            <span class="font-semibold">风险：</span>招投标门槛收紧，行业集中度上升
+          </div>
+        </div>
+      </div>
+      <!-- 2028-2030 -->
+      <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="timeline-dot bg-[#7c3aed] border-[#7c3aed]"></div>
+          <div>
+            <div class="text-xs font-bold text-[#7c3aed]">2028–2030年</div>
+            <div class="font-bold text-base">下游年 · 行业洗牌</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-[#f8f7f4] rounded-xl p-3">
+            <div class="text-xs font-semibold text-[#5a564e] mb-1.5">政策状态</div>
+            <ul class="text-xs text-[#5a564e] space-y-1">
+              <li>• 法规体系、技术标准、收费机制基本成型</li>
+              <li>• 部分项目进入运营期和绩效评估期</li>
+              <li>• 需要运营优化再设计方案</li>
+            </ul>
+          </div>
+          <div class="bg-[#f3e8ff] rounded-xl p-3">
+            <div class="text-xs font-semibold text-[#7c3aed] mb-1.5">企业分化方向</div>
+            <ul class="text-xs text-[#7c3aed] space-y-1">
+              <li>• 超大院：全国性城市更新总集成</li>
+              <li>• 区域综合院：深耕某省/都市圈</li>
+              <li>• 专业细分团队：某一领域全国口碑</li>
+            </ul>
+          </div>
+          <div class="text-xs text-[#1e7a3a] bg-[#e6f4ea] rounded-xl p-3">
+            <span class="font-semibold">小所两条路：</span>A. 区域型小而美综合团队 / B. 全国可迁移专业细分专家
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part 3: Strategy for Small Firms -->
+  <section class="section mb-10">
+    <h2>三、10人以下事务所具体打法</h2>
+
+    <!-- Short-term Strategy -->
+    <div class="mb-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="tag tag-amber">短中期 1-2年</div>
+        <div class="font-bold text-base">活下去 + 卡位</div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <!-- 选赛道 -->
+        <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+          <div class="text-3xl mb-3">🎯</div>
+          <h3 class="font-bold text-base mb-3">1. 选赛道：定一个"主科目"</h3>
+          <div class="space-y-2">
+            <div class="bg-[#e8f0fe] rounded-lg p-3">
+              <div class="text-xs font-semibold text-[#1a56db] mb-1">老旧小区/完整社区</div>
+              <div class="text-xs text-[#5a564e]">加装电梯、立面更新、口袋公园、适老化设施、一刻钟生活圈</div>
+            </div>
+            <div class="bg-[#fef7e0] rounded-lg p-3">
+              <div class="text-xs font-semibold text-[#b45309] mb-1">老旧厂房/街区更新</div>
+              <div class="text-xs text-[#5a564e]">厂房改文创/办公、老旧商业街更新、文旅IP场景植入</div>
+            </div>
+            <div class="bg-[#e6f4ea] rounded-lg p-3">
+              <div class="text-xs font-semibold text-[#1e7a3a] mb-1">绿色与低碳改造专项</div>
+              <div class="text-xs text-[#5a564e]">既有建筑节能改造、装配式内装方案设计</div>
+            </div>
+            <div class="bg-[#f3e8ff] rounded-lg p-3">
+              <div class="text-xs font-semibold text-[#7c3aed] mb-1">历史街区与文化遗产活化</div>
+              <div class="text-xs text-[#5a564e]">历史建筑测绘、保护修缮、风貌控制与有机更新</div>
+            </div>
+          </div>
+        </div>
+        <!-- 补技能 -->
+        <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+          <div class="text-3xl mb-3">🔧</div>
+          <h3 class="font-bold text-base mb-3">2. 立刻补三块"硬技能"</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-[#e8f0fe] flex items-center justify-center text-sm shrink-0">B</div>
+              <div>
+                <div class="text-xs font-semibold text-[#15140f]">BIM/CIM 基础能力</div>
+                <div class="text-xs text-[#5a564e]">至少能用BIM输出基础图模，理解CIM平台数据字段和精度要求</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-[#e6f4ea] flex items-center justify-center text-sm shrink-0">G</div>
+              <div>
+                <div class="text-xs font-semibold text-[#15140f]">绿色与节能设计</div>
+                <div class="text-xs text-[#5a564e]">方案阶段能效优化建议，熟悉绿色建材系统及装配式构造</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-[#fef7e0] flex items-center justify-center text-sm shrink-0">S</div>
+              <div>
+                <div class="text-xs font-semibold text-[#15140f]">规范化存量改造流程</div>
+                <div class="text-xs text-[#5a564e]">现场查勘→多维评估→多方案比较→成本建议→分阶段实施</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 组织方式 -->
+        <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+          <div class="text-3xl mb-3">🤝</div>
+          <h3 class="font-bold text-base mb-3">3. 联合作战，别急着长大</h3>
+          <div class="space-y-3">
+            <div class="bg-[#f8f7f4] rounded-xl p-3">
+              <div class="text-xs font-semibold text-[#5a564e] mb-1.5">合作形式</div>
+              <ul class="text-xs text-[#5a564e] space-y-1.5">
+                <li>• <span class="font-semibold">联合体投标</span>：大院牵头，你们做方案创作与专题服务</li>
+                <li>• <span class="font-semibold">框架协议</span>：与平台公司签年度顾问合同</li>
+                <li>• <span class="font-semibold">专家库/智库</span>：进入城市更新专家库、三师联创团队</li>
+              </ul>
+            </div>
+            <div class="text-xs text-[#5a564e] bg-[#fde8e8] rounded-xl p-3">
+              <span class="font-semibold text-[#9c2a25]">不要幻想直接抢总包</span>，主动做"联合体成员+专业分包+智库角色"
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Long-term Strategy -->
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="tag tag-blue">中长期 3-5年</div>
+        <div class="font-bold text-base">活得好 + 有主动权</div>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+          <div class="text-3xl mb-3">📦</div>
+          <h3 class="font-bold text-sm mb-2">产品化</h3>
+          <p class="text-xs text-[#5a564e] leading-relaxed">把项目经验提炼成可复制产品："老旧小区一站式微更新包""厂房改文创模板方案库"。带着方法论与成熟模板进入合作。</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+          <div class="text-3xl mb-3">🗺️</div>
+          <h3 class="font-bold text-sm mb-2">片区视角</h3>
+          <p class="text-xs text-[#5a564e] leading-relaxed">从单栋修补升级到片区统筹。在一条街、一个老厂区形成连续作品群，占据稳定话语权和议价空间。</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="font-bold text-sm mb-2">管好现金流</h3>
+          <p class="text-xs text-[#5a564e] leading-relaxed">三看：看资金来源、看合同条款、看自身体量。跨期未结算收入控制在年营业额50%以内。</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 border border-[#e7e5e0] card-hover">
+          <div class="text-3xl mb-3">🏆</div>
+          <h3 class="font-bold text-sm mb-2">品牌专家化</h3>
+          <p class="text-xs text-[#5a564e] leading-relaxed">核心合伙人在细分方向深耕，发表文章、参与行业会议。对外突出"专注于××城市更新"的定位。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Risk Matrix -->
+  <section class="section mb-10">
+    <h2>风险矩阵与应对</h2>
+    <div class="rounded-2xl border border-[#e7e5e0] overflow-hidden bg-white">
+      <table>
+        <thead>
+          <tr>
+            <th>风险类型</th>
+            <th>风险描述</th>
+            <th>影响程度</th>
+            <th>应对策略</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-semibold">资金风险</td>
+            <td>城市更新长周期、慢回款，政府和平台公司参与多</td>
+            <td><span class="tag tag-red">高</span></td>
+            <td>明确资金到位节点；合同按成果节点付款；控制跨期应收款比例</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">资质门槛</td>
+            <td>正式建设项目要求特定资质等级，小事务所达不到</td>
+            <td><span class="tag tag-amber">中</span></td>
+            <td>联合体投标；做专业分包；进入专家库建立信任</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">行业集中</td>
+            <td>头部设计院通过一体化服务锁定大盘子项目</td>
+            <td><span class="tag tag-amber">中</span></td>
+            <td>不抢总包，做细分方向的"必选项"</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">法律风险</td>
+            <td>规划变更、权属纠纷、补偿争议等</td>
+            <td><span class="tag tag-red">高</span></td>
+            <td>不做项目公司投资方；避免合同中承担过重"结果责任"</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">技术迭代</td>
+            <td>BIM/CIM/绿色建筑标准快速更新</td>
+            <td><span class="tag tag-amber">中</span></td>
+            <td>定期法规与政策学习+技术培训；保持技术敏感度</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Insights -->
+  <section class="section mb-10">
+    <h2>核心洞察</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] card-hover">
+        <div class="text-3xl mb-2">🔄</div>
+        <div class="font-semibold mb-1.5 text-sm">结构性重塑而非增量</div>
+        <div class="text-xs text-[#5a564e] leading-relaxed">这轮城市更新不是"给所有人端上大锅饭"，而是一次集中考验：你能否在一个具体场景里做出别人离不开的专业与产品。</div>
+      </div>
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] card-hover">
+        <div class="text-3xl mb-2">🎯</div>
+        <div class="font-semibold mb-1.5 text-sm">小所的核心优势</div>
+        <div class="text-xs text-[#5a564e] leading-relaxed">灵活创新+在地性理解+贴近生活场景。"好房子""完整社区""小而美公共空间"正是小团队的主场。</div>
+      </div>
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] card-hover">
+        <div class="text-3xl mb-2">⏰</div>
+        <div class="font-semibold mb-1.5 text-sm">窗口期有限</div>
+        <div class="text-xs text-[#5a564e] leading-relaxed">2026-2027是卡位关键期。找准方向、搭好合作、做出案例，才能在2030年成为"必选项"。</div>
+      </div>
+      <div class="rounded-2xl bg-white p-5 border border-[#e7e5e0] card-hover">
+        <div class="text-3xl mb-2">💡</div>
+        <div class="font-semibold mb-1.5 text-sm">从"画图小馆"到"专家小所"</div>
+        <div class="text-xs text-[#5a564e] leading-relaxed">核心合伙人在细分方向深耕，建立"专注于××城市更新"的品牌定位，从纯劳务升级为带着方法论的合作方。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Criteria -->
+  <section class="section mb-10">
+    <h2>2026–2027 关键里程碑</h2>
+    <div class="rounded-2xl bg-gradient-to-br from-[#1a2a4a] to-[#2d3f6a] p-8 text-white">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="text-5xl font-extrabold num mb-2">1–2</div>
+          <div class="text-sm font-semibold mb-1">个细分方向</div>
+          <div class="text-xs text-white/70">找准主攻场景，建立专业标签</div>
+        </div>
+        <div class="text-center">
+          <div class="text-5xl font-extrabold num mb-2">2–3</div>
+          <div class="text-sm font-semibold mb-1">条"大船"</div>
+          <div class="text-xs text-white/70">稳定合作的大院/平台公司/政府部门</div>
+        </div>
+        <div class="text-center">
+          <div class="text-5xl font-extrabold num mb-2">3–5</div>
+          <div class="text-sm font-semibold mb-1">个标杆项目</div>
+          <div class="text-xs text-white/70">可写进简报和案例集的更新作品</div>
+        </div>
+      </div>
+      <div class="mt-6 pt-5 border-t border-white/20 text-center">
+        <p class="text-sm text-white/80">从"随时可能被淘汰的一支小队" → 某一区域或某个细分方向里，被主动点名合作的"必选项"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <details class="mt-12 rounded-xl border border-[#e7e5e0] bg-white p-5">
+    <summary class="cursor-pointer text-sm font-semibold text-[#5a564e] flex items-center justify-between">
+      方法论与参考来源 · Methodology <span class="text-[#5a564e]">▾</span>
+    </summary>
+    <div class="text-xs text-[#5a564e] leading-relaxed mt-3 max-w-3xl space-y-2">
+      <p><strong>数据来源：</strong></p>
+      <ul class="space-y-1 ml-4">
+        <li>[1] 国务院印发《城市更新"十五五"规划》的通知 — <a href="https://www.gov.cn/zhengce/content/202605/content_7070539.htm" class="text-[#1a56db] underline" target="_blank">gov.cn</a></li>
+        <li>[2] 《中共中央办公厅 国务院办公厅关于持续推进城市更新行动的意见》有关解读 — <a href="https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=102682" class="text-[#1a56db] underline" target="_blank">mofcom.gov.cn</a></li>
+        <li>[3] 一文读懂城市更新 — <a href="https://www.allbrightlaw.com/CN/10475/774a3fb268ebbbd3.aspx" class="text-[#1a56db] underline" target="_blank">锦天城律师事务所</a></li>
+      </ul>
+      <p><strong>推演方法：</strong>基于政策原文分析、行业趋势研判、结合建筑设计行业特点进行情景推演。图表数据为趋势预测示意，非精确统计。</p>
+    </div>
+  </details>
+
+</div>
+
+<script>
+// Timeline Chart - Industry Heat & Opportunity Distribution
+new Chart(document.getElementById('chart-timeline'), {
+  type: 'line',
+  data: {
+    labels: ['2026H1','2026H2','2027H1','2027H2','2028','2029','2030'],
+    datasets: [
+      {label:'规划/体检/导则', data:[85,70,40,25,15,10,8], borderColor:'#1a56db', backgroundColor:'rgba(26,86,219,0.08)', tension:0.4, borderWidth:2.5, fill:true, pointRadius:4},
+      {label:'片区策划/城市设计', data:[40,65,80,70,50,35,25], borderColor:'#b45309', backgroundColor:'rgba(180,83,9,0.08)', tension:0.4, borderWidth:2.5, fill:true, pointRadius:4},
+      {label:'单体改造/小尺度更新', data:[15,30,55,80,85,80,70], borderColor:'#1e7a3a', backgroundColor:'rgba(30,122,58,0.08)', tension:0.4, borderWidth:2.5, fill:true, pointRadius:4},
+      {label:'运营优化/绩效评估', data:[2,5,10,20,40,65,80], borderColor:'#7c3aed', backgroundColor:'rgba(124,58,237,0.08)', tension:0.4, borderWidth:2.5, fill:true, pointRadius:4}
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,font:{size:11}}}},
+    scales:{
+      x:{grid:{display:false}},
+      y:{grid:{color:'#f0ece5'}, ticks:{callback:v=>v+'%'}, max:100, title:{display:true, text:'需求热度 %', font:{size:11}}}
+    }
+  }
+});
+
+// Project Type Distribution
+new Chart(document.getElementById('chart-project-type'), {
+  type: 'doughnut',
+  data: {
+    labels: ['老旧小区/完整社区','老旧厂区/街区更新','绿色低碳改造','历史街区活化','其他公共服务设施'],
+    datasets: [{
+      data: [35, 25, 18, 12, 10],
+      backgroundColor: ['#1a56db','#b45309','#1e7a3a','#7c3aed','#5a564e'],
+      borderWidth: 0,
+      hoverOffset: 8
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,font:{size:10},padding:12}},
+      tooltip:{callbacks:{label:function(ctx){return ctx.label+': '+ctx.parsed+'%';}}}
+    },
+    cutout:'55%'
+  }
+});
+</script>
+
+</body>
+</html>
