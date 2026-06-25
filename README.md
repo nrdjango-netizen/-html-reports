@@ -5,6 +5,8 @@
 ## 文件
 
 - `index.html`：预览首页
+- `kurong_wenxianlu_latest.html`：枯荣问仙录最新版入口
+- `kurong_wenxianlu_v13.html`：枯荣问仙录 V13 文案剧情深化版归档
 - `15th_five_year_plan_architecture_report.html`：十五五规划推演报告 · 建筑设计行业大趋势与10人以下事务所打法建议
 - `20260617_十五五规划推演报告.html`：十五五规划推演报告 · 建筑设计行业
 - `20260617_十五五规划推演报告.md`：十五五规划推演报告 Markdown 源文件
@@ -24,6 +26,8 @@ https://你的GitHub用户名.github.io/-html-reports/
 
 ```text
 https://你的GitHub用户名.github.io/-html-reports/20260617_十五五规划推演报告.html
+https://你的GitHub用户名.github.io/-html-reports/kurong_wenxianlu_latest.html
+https://你的GitHub用户名.github.io/-html-reports/kurong_wenxianlu_v13.html
 https://你的GitHub用户名.github.io/-html-reports/15th_five_year_plan_architecture_report.html
 https://你的GitHub用户名.github.io/-html-reports/20260519_guangzhou_community_renewal_trend_report_v1.html
 https://你的GitHub用户名.github.io/-html-reports/20260518_project_development_trend_analysis_report.html
